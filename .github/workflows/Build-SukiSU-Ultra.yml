@@ -139,8 +139,8 @@ jobs:
       - name: 配置Git信息
         run: |
           set -e
-          git config --global user.name "FurLC"
-          git config --global user.email "qq441791056@163.com"
+          git config --global user.name "zyLucia"
+          git config --global user.email "qq1850000036"
   
       - name: 安装repo工具
         run: |
@@ -164,7 +164,7 @@ jobs:
           for script in kernel_platform/common/scripts/setlocalversion kernel_platform/msm-kernel/scripts/setlocalversion kernel_platform/external/dtc/scripts/setlocalversion; do
             sed -i 's/ -dirty//g' "$script"
             sed -i '$i res=$(echo "$res" | sed '\''s/-dirty//g'\'')' "$script"
-            sed -i '$s|echo "\$res"|echo "-FurLC"|' "$script"
+            sed -i '$s|echo "\$res"|echo "-zyLucia"|' "$script"
           done
   
       - name: 注入KernelSU-SukiSU Ultra
