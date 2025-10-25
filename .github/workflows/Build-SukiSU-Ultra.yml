@@ -176,7 +176,7 @@ jobs:
             build-essential flex bison libssl-dev \
             libncurses-dev liblz4-tool zlib1g-dev \
             libxml2-utils rsync unzip bc \
-            binutils-aarch64-linux-gnu
+            binutils-aarch64-linux-gnu lld
           echo "所有依赖项已成功安装"
       
       - name: 恢复ccache缓存
