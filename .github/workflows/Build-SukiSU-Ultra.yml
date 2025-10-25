@@ -19,7 +19,7 @@ on:
           - sm8650
           - sm8750
         # CPU_OPTIONS_END
-      
+
       FEIL:
         description: 配置文件
         type: choice
@@ -64,7 +64,7 @@ on:
           - oneplus_pad_3
           - oneplus_pad_pro_v
         # FEIL_OPTIONS_END
-      
+
       CPUD:
         description: "处理器代号"
         type: choice
@@ -77,7 +77,7 @@ on:
           - waipio
           - kalama
           - sun
-      
+
       ANDROID_VERSION:
         description: "内核安卓版本"
         type: choice
@@ -88,7 +88,7 @@ on:
           - android13
           - android14
           - android15
-      
+
       KERNEL_VERSION:
         description: "内核版本"
         type: choice
@@ -99,6 +99,12 @@ on:
           - "5.15"
           - "6.1"
           - "6.6"
+
+      KPM:
+        description: 是否启用KPM
+        type: boolean
+        required: true
+        default: false
       
       ZRAM:
         description: 是否启用更多ZRAM算法
@@ -107,14 +113,14 @@ on:
         default: true
 jobs:
   build:
-    name: ${{ github.event.inputs.FEIL }}${{ github.event.inputs.ZRAM == 'true' && '_ZRAM' || '' }}
+    name: ${{ github.event.inputs.FEIL }}_${{ github.event.inputs.KPM == 'true' && 'KPM' || 'NoKPM' }}${{ github.event.inputs.ZRAM == 'true' && '_ZRAM' || '' }}
     runs-on: ubuntu-latest
     env:
       CCACHE_COMPILERCHECK: "%compiler% -dumpmachine; %compiler% -dumpversion"
       CCACHE_NOHASHDIR: "true"
       CCACHE_HARDLINK: "true"
       CCACHE_MAXSIZE: 8G
-    
+
     steps:
       - name: "最大化构建空间"
         uses: easimon/maximize-build-space@master
@@ -125,10 +131,10 @@ jobs:
           remove-android: 'true'
           remove-haskell: 'true'
           remove-codeql: 'true'
-          
+
       - name: 拉取仓库
         uses: actions/checkout@v4
-      
+
       - name: 设置缓存环境
         run: |
           # 设置机型隔离缓存目录 #
@@ -297,12 +303,17 @@ jobs:
             echo "ZRAM补丁应用完成"
           fi
           echo "所有补丁应用完成"
-      
+
       - name: 写入内核配置
         run: |
           cd kernel_workspace/kernel_platform
           # Hooks基础配置 #
           echo "CONFIG_KSU=y" >> ./common/arch/arm64/configs/gki_defconfig
+
+          # KPM基础配置 #
+          if [[ "${{ github.event.inputs.KPM }}" == "true" ]]; then
+            echo "CONFIG_KPM=y" >> ./common/arch/arm64/configs/gki_defconfig
+          fi
 
           # VFS基础配置 #
           echo "CONFIG_KSU_SUSFS_SUS_SU=n" >> ./common/arch/arm64/configs/gki_defconfig
@@ -398,14 +409,15 @@ jobs:
       
       - name: 制作AnyKernel3内核刷机包
         run: |
-          git clone --depth=1 https://github.com/Kernel-SU/AnyKernel3 AnyKernel3
-          rm -rf AnyKernel3/.git
+          git clone --depth=1 https://github.com/Kernel-SU/AnyKernel3 AnyKernel3-no_kpm
+          cp -a AnyKernel3-no_kpm AnyKernel3-kpm
+          rm -rf AnyKernel3-{no_kpm,kpm}/.git
           
           image_path=$(find "./kernel_workspace/kernel_platform/common/out/" -name "Image" -print -quit 2>/dev/null || true)
           
           if [[ -n "$image_path" && -f "$image_path" ]]; then
             echo "Image文件在: $image_path"
-            cp "$image_path" ./AnyKernel3/Image
+            cp "$image_path" ./AnyKernel3-no_kpm/Image
           else
             echo "未找到 Image 文件，构建可能失败"
             exit 1
@@ -424,12 +436,29 @@ jobs:
           zram_suffix=$([[ "${{ github.event.inputs.ZRAM }}" == "true" ]] && echo "_lz4kd" || echo "")
           echo "ZRAM_SUFFIX=$zram_suffix" >> "$GITHUB_ENV"
       
-      - name: 上传AnyKernel3
+      - name: 上传AnyKernel3 (No_KPM)
         uses: actions/upload-artifact@v4
         with:
-          name: AnyKernel3_SukiSU_Ultra_${{ env.FEIL_NAME }}{{ env.ZRAM_SUFFIX }}_${{ env.BUILD_DATE }}
-          path: AnyKernel3/*
+          name: AnyKernel3_SukiSU_Ultra_${{ env.FEIL_NAME }}_NoKPM${{ env.ZRAM_SUFFIX }}_${{ env.BUILD_DATE }}
+          path: AnyKernel3-no_kpm/*
       
+      - name: 应用KPM补丁
+        if: ${{ github.event.inputs.KPM == 'true' }}
+        run: |
+          cd AnyKernel3-no_kpm
+          curl -LO https://github.com/SukiSU-Ultra/SukiSU_KernelPatch_patch/releases/download/0.12.0/patch_linux
+          chmod +x patch_linux
+          ./patch_linux
+          cp oImage "$GITHUB_WORKSPACE/AnyKernel3-kpm/Image"
+          echo "KPM补丁应用完成"
+      
+      - name: 上传AnyKernel3 (KPM)
+        if: ${{ github.event.inputs.KPM == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: AnyKernel3_SukiSU_Ultra_${{ env.FEIL_NAME }}_KPM${{ env.ZRAM_SUFFIX }}_${{ env.BUILD_DATE }}
+          path: AnyKernel3-kpm/*
+
       - name: 提取ZRAM相关模块
         if: ${{ github.event.inputs.ZRAM == 'true' }}
         id: extract_zram
