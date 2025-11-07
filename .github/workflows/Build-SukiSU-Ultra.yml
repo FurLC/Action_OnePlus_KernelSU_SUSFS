@@ -274,7 +274,7 @@ jobs:
           cd kernel_platform
           # 复制susfs补丁 #
           cp ../susfs4ksu/kernel_patches/50_add_susfs_in_gki-${{ github.event.inputs.ANDROID_VERSION }}-${{ github.event.inputs.KERNEL_VERSION }}.patch ./common/
-          cp ../SukiSU_patch/hooks/scope_min_manual_hooks_v1.5.patch ./common/
+          cp ../SukiSU_patch/hooks/scope_min_manual_hooks_v1.6.patch ./common/
           cp ../SukiSU_patch/69_hide_stuff.patch ./common/
           cp ../susfs4ksu/kernel_patches/fs/* ./common/fs/
           cp ../susfs4ksu/kernel_patches/include/linux/* ./common/include/linux/
@@ -293,7 +293,7 @@ jobs:
           # 应用susfs补丁 #
           patch -p1 < 50_add_susfs_in_gki-${{ github.event.inputs.ANDROID_VERSION }}-${{ github.event.inputs.KERNEL_VERSION }}.patch || true
           patch -p1 -F 3 < 69_hide_stuff.patch
-          patch -p1 -F 3 < scope_min_manual_hooks_v1.5.patch
+          patch -p1 -F 3 < scope_min_manual_hooks_v1.6.patch
           echo "SUSFS补丁应用完成"
       
           # 应用ZRAM补丁 #
