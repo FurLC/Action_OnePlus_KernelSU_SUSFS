@@ -29,8 +29,6 @@ on:
         options:
           - JiuGeFaCai_oneplus_13_v
           - JiuGeFaCai_oneplus_ace5_pro_v
-          - oneplus12_u
-          - oneplus12_v
           - oneplus_10_pro_s
           - oneplus_10_pro_v
           - oneplus_10t_v
@@ -39,12 +37,18 @@ on:
           - oneplus_11_v
           - oneplus_11r_u
           - oneplus_11r_v
+          - oneplus_12_u
+          - oneplus_12_v
           - oneplus_12r_v
           - oneplus_13
+          - oneplus_13_b
           - oneplus_13_global
           - oneplus_13r
           - oneplus_13s
+          - oneplus_13s_b
           - oneplus_13t
+          - oneplus_13t_b
+          - oneplus_15
           - oneplus_ace2_pro_v
           - oneplus_ace2_v
           - oneplus_ace3_pro
@@ -52,7 +56,9 @@ on:
           - oneplus_ace3_v
           - oneplus_ace5
           - oneplus_ace5_pro
+          - oneplus_ace5_pro_b
           - oneplus_ace_3v_v
+          - oneplus_ace_6
           - oneplus_ace_pro_v
           - oneplus_nord_4_v
           - oneplus_nord_5
