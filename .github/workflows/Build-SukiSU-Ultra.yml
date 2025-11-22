@@ -67,7 +67,9 @@ on:
           - oneplus_open_v
           - oneplus_pad2_v
           - oneplus_pad_2_pro
+          - oneplus_pad_2_pro_b
           - oneplus_pad_3
+          - oneplus_pad_3_b
           - oneplus_pad_pro
           - oneplus_pad_pro_v
         # FEIL_OPTIONS_END
