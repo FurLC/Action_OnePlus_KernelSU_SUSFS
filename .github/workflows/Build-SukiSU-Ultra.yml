@@ -37,6 +37,7 @@ on:
           - oneplus_11_v
           - oneplus_11r_u
           - oneplus_11r_v
+          - oneplus_12_b
           - oneplus_12_u
           - oneplus_12_v
           - oneplus_12r_v
@@ -44,6 +45,7 @@ on:
           - oneplus_13_b
           - oneplus_13_global
           - oneplus_13r
+          - oneplus_13r_b
           - oneplus_13s
           - oneplus_13s_b
           - oneplus_13t
@@ -55,6 +57,7 @@ on:
           - oneplus_ace3_pro_v
           - oneplus_ace3_v
           - oneplus_ace5
+          - oneplus_ace5_b
           - oneplus_ace5_pro
           - oneplus_ace5_pro_b
           - oneplus_ace_3v_v
