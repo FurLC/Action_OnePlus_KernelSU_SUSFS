@@ -274,7 +274,7 @@ jobs:
           echo "正在下载补丁文件: $url"
           curl -L "$url" -o modify_kernel_exec
           chmod +x modify_kernel_exec
-          ./modify_kernel_exec ${{ github.event.inputs.ANDROID_VERSION }}
+          # ./modify_kernel_exec ${{ github.event.inputs.ANDROID_VERSION }}
           
       - name: 设置susfs并应用主补丁
         run: |
