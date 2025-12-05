@@ -32,6 +32,7 @@ on:
           - oneplus_10_pro_s
           - oneplus_10_pro_v
           - oneplus_10t_v
+          - oneplus_11_b
           - oneplus_11_t
           - oneplus_11_u
           - oneplus_11_v
@@ -40,6 +41,7 @@ on:
           - oneplus_12_b
           - oneplus_12_u
           - oneplus_12_v
+          - oneplus_12r_b
           - oneplus_12r_v
           - oneplus_13
           - oneplus_13_b
@@ -53,6 +55,7 @@ on:
           - oneplus_15
           - oneplus_ace2_pro_v
           - oneplus_ace2_v
+          - oneplus_ace3_b
           - oneplus_ace3_pro
           - oneplus_ace3_pro_v
           - oneplus_ace3_v
@@ -67,6 +70,7 @@ on:
           - oneplus_nord_5
           - oneplus_nord_ce4_lite_5g_v
           - oneplus_nord_ce4_v
+          - oneplus_open_b
           - oneplus_open_v
           - oneplus_pad2_v
           - oneplus_pad_2_pro
