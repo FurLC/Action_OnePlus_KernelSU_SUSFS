@@ -65,12 +65,15 @@ on:
           - oneplus_ace5_b
           - oneplus_ace5_pro
           - oneplus_ace5_pro_b
+          - oneplus_ace_3v_b
           - oneplus_ace_3v_v
           - oneplus_ace_6
           - oneplus_ace_6t
           - oneplus_ace_pro_v
+          - oneplus_nord_4_b
           - oneplus_nord_4_v
           - oneplus_nord_5
+          - oneplus_nord_5_b
           - oneplus_nord_ce4_lite_5g_v
           - oneplus_nord_ce4_v
           - oneplus_open_b
