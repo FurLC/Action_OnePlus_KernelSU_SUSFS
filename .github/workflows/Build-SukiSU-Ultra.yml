@@ -37,6 +37,7 @@ on:
           - oneplus_11_t
           - oneplus_11_u
           - oneplus_11_v
+          - oneplus_11r_b
           - oneplus_11r_u
           - oneplus_11r_v
           - oneplus_12_b
@@ -54,11 +55,13 @@ on:
           - oneplus_13t
           - oneplus_13t_b
           - oneplus_15
+          - oneplus_ace2_b
           - oneplus_ace2_pro_b
           - oneplus_ace2_pro_v
           - oneplus_ace2_v
           - oneplus_ace3_b
           - oneplus_ace3_pro
+          - oneplus_ace3_pro_b
           - oneplus_ace3_pro_v
           - oneplus_ace3_v
           - oneplus_ace5
@@ -78,12 +81,14 @@ on:
           - oneplus_nord_ce4_v
           - oneplus_open_b
           - oneplus_open_v
+          - oneplus_pad2_b
           - oneplus_pad2_v
           - oneplus_pad_2_pro
           - oneplus_pad_2_pro_b
           - oneplus_pad_3
           - oneplus_pad_3_b
           - oneplus_pad_pro
+          - oneplus_pad_pro_b
           - oneplus_pad_pro_v
         # FEIL_OPTIONS_END
 
