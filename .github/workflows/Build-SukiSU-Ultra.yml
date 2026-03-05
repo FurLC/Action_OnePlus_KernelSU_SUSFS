@@ -29,6 +29,7 @@ on:
         options:
           - JiuGeFaCai_oneplus_13_v
           - JiuGeFaCai_oneplus_ace5_pro_v
+          - oneplus_10_pro_b
           - oneplus_10_pro_s
           - oneplus_10_pro_u
           - oneplus_10_pro_v
